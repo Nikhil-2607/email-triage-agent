@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Email Triage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar glass-panel">
+            <div class="logo-area">
+                <div class="glow-orb"></div>
+                <h2>TriageAI</h2>
+            </div>
+            <nav>
+                <a href="#" class="nav-item active">Dashboard</a>
+                <a href="#" class="nav-item">History</a>
+                <a href="#" class="nav-item">Settings</a>
+            </nav>
+            <div class="status-indicator">
+                <span class="status-dot online"></span>
+                <span>System Online</span>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>Email Triage Engine</h1>
+                <p class="subtitle">Real-time LLM Agent Evaluation Environment</p>
+            </header>
+
+            <!-- Metrics Level -->
+            <section class="metrics-grid">
+                <div class="metric-card glass-panel">
+                    <h3>Total Episodes</h3>
+                    <div class="metric-value" id="totalEpisodes">0</div>
+                </div>
+                <div class="metric-card glass-panel">
+                    <h3>Total Score</h3>
+                    <div class="metric-value" id="totalScore">0.0</div>
+                </div>
+                <div class="metric-card glass-panel">
+                    <h3>Avg Reward</h3>
+                    <div class="metric-value" id="avgReward">0.0</div>
+                </div>
+            </section>
+
+            <!-- Testing Level -->
+            <section class="testing-section glass-panel">
+                <div class="section-header">
+                    <h2>Live Agent Evaluation</h2>
+                    <span class="badge">Llama-3.3-70b</span>
+                </div>
+                <div class="eval-layout">
+                    <!-- Left: Input Form -->
+                    <div class="eval-input">
+                        <div class="form-group">
+                            <label>Groq API Key (Optional)</label>
+                            <input type="password" id="groqKey" placeholder="If not saved in environment, enter 'gsk_...' here..." style="background: rgba(0, 0, 0, 0.2); border: 1px solid var(--panel-border); color: var(--text-primary); padding: 12px 16px; border-radius: 8px; font-family: var(--font-fam); width: 100%;">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Test Email Content</label>
+                            <textarea id="emailText" placeholder="Enter an email to evaluate..."></textarea>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Ideal Category</label>
+                                <select id="idealCategory">
+                                    <option value="spam">Spam</option>
+                                    <option value="urgent">Urgent</option>
+                                    <option value="standard">Standard</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Ideal Action</label>
+                                <select id="idealAction">
+                                    <option value="delete">Delete</option>
+                                    <option value="reply">Reply</option>
+                                    <option value="forward">Forward</option>
+                                    <option value="categorize">Categorize</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Ideal Resolution</label>
+                                <select id="idealResolution">
+                                    <option value="none">None</option>
+                                    <option value="sales">Sales Team</option>
+                                    <option value="support">Support Team</option>
+                                    <option value="it">IT Team</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button id="evaluateBtn" class="btn-primary">
+                            <span class="btn-text">Run Evaluation</span>
+                            <div class="spinner hidden"></div>
+                        </button>
+                    </div>
+
+                    <!-- Right: Results -->
+                    <div class="eval-results glass-panel inner-panel">
+                        <h3>Agent Response</h3>
+                        <div id="resultsPlaceholder" class="placeholder-text">Waiting for evaluation...</div>
+                        
+                        <div id="resultsContent" class="hidden">
+                            <div class="result-row">
+                                <span class="label">Category:</span>
+                                <span class="value badge-outline" id="resCategory">-</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="label">Action:</span>
+                                <span class="value badge-outline" id="resAction">-</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="label">Resolution:</span>
+                                <span class="value badge-outline" id="resResolution">-</span>
+                            </div>
+                            <div class="result-row highlight">
+                                <span class="label">Reward:</span>
+                                <span class="value reward-val" id="resReward">0.0</span>
+                            </div>
+                            <div class="feedback-box">
+                                <p id="resFeedback"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
